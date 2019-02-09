@@ -1,2 +1,5 @@
 tweepy
 Flask
+nltk
+numpy
+re

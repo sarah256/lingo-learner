@@ -1,10 +1,11 @@
-import re 
+import re
+import nltk
 import tweepy 
 from tweepy import OAuthHandler 
 
 class TwitterClient(object): 
 	''' 
-	Generic Twitter Class for sentiment analysis. 
+	Generic Twitter Class for analysis. 
 	'''
 	def __init__(self): 
 		''' 
@@ -36,7 +37,8 @@ class TwitterClient(object):
 
 	def get_tweets(self, query, count = 10): 
 		''' 
-		Main function to fetch tweets and parse them. 
+		Main function to fetch tweets and parse them.
+		Returns an array of arrays of tokenized tweets.
 		'''
 		# empty list to store parsed tweets 
 		tweets = [] 
@@ -57,11 +59,13 @@ class TwitterClient(object):
 				if tweet.retweet_count > 0: 
 					# if tweet has retweets, ensure that it is appended only once 
 					if parsed_tweet not in tweets: 
-						tweets.append(parsed_tweet) 
+						tokens = nltk.word_tokenize(tweet)
+						tweets.append(tokens)
 				else: 
-					tweets.append(parsed_tweet) 
+					tokens = nltk.word_tokenize(tweet)
+					tweets.append(tokens)
 
-			# return parsed tweets 
+			# return parsed and tokenized tweets 
 			return tweets 
 
 		except tweepy.TweepError as e: 
