@@ -50,15 +50,6 @@ class InvertedIndex:
         return { term: self.index[term] for term in query.split(' ') if term in self.index }
 
 
-invertedFile = InvertedIndex.Index()
-
-filename = "tweets.txt"
-
-stopWords = ["the", "a", "an", "by", "for", "on", "if", "at", "in", ]
-
-def removeStopWords(d):
-
-
 file_to_index = open(filename).read()
 document_key = filename
 
