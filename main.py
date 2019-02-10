@@ -44,7 +44,7 @@ def input_text():
 		# 	stuff=data
 		# 	), 200
 
-	return render_template("home.html") 
+	return render_template("define.html", definition=definition) 
 
 if __name__ == "__main__":
     app.run(debug=True)
