@@ -49,6 +49,16 @@ class LangProcessor():
 		result = model.most_similar(query)
 		return result
 
+	def generateDefinition(word, pos, synonyms):
+		if "NN" in pos:
+			return "A "+word+"is a "+synonyms[0]+", "+ synonyms[1]+", or "+synonyms[2]
+		if "VB" in pos:
+			return "To "+word+"is to "+synonyms[0]+", "+synonyms[1]+", or "+synonyms[2]
+		if "JJ" in pos:
+			return word + "means " + synonyms[0]+", "+synonyms[1]+",or "+synonyms[2]
+		else:
+			return synonyms[0]+",or "+synonyms[1]+", or"+synonyms[2]
+
 
 def main():
 
@@ -64,6 +74,11 @@ def main():
 	text = "corpus.txt"
 	newCorp = langP.addtoCorpus(text, tweets)
 	model = langP.build_model
+	similars = []
+	similars.append(model[0][0])
+	similars.append(model[1][0])
+	similars.append(model[2][0])
+	definition = langP.generateDefinition(query, pos, similars)
 
 
 
