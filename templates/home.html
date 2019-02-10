@@ -2,12 +2,29 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<title>Lingo Learner</title>
+		<title>Yo-setta Stone</title>
 		<link rel="stylesheet" href="{{ url_for('static',    filename='css/home.css') }}">
 	</head>
 	<body>
 	    <h1>Enter some slang to search!</h1>
 		<p>The app will return what it thinks this slang means based on the context it is used in on Twitter!</p>
-		<input type="text" placeholder="Search..">
+		<form action="/input" method="POST">
+			<input type="text" name="submitText" id="submitText" placeholder="Search.."><button onclick="smh();" type="button">Submit!</button>
+		</form>
 	</body>
 </html>
+<script>
+	function smh() {
+		let query = document.getElementById("submitText").value;
+		console.log("smh", query);
+
+		var http = new XMLHttpRequest();
+		http.onreadystatechange = () => {
+			console.log("wub wub got a response");
+		}
+
+		http.open("POST", "http://127.0.0.1:5000/input", true);
+		http.send();
+	}
+
+</script>
