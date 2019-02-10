@@ -37,6 +37,13 @@ def input_text():
 		similars.append(model[2][0])
 		definition = langP.generateDefinition(query, pos, similars)
 		print(definition)
+		pos_display = ''
+		if 'NN' in pos:
+			pos_display = 'noun'
+		if 'VB' in pos:
+			pos_display = 'verb'
+		# if 'RB' in pos:
+		# 	pos_display =
 		# import pdb;pdb.set_trace()
 		# return jsonify(isError=False,
 		# 	message="Success",
