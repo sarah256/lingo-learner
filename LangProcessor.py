@@ -2,9 +2,13 @@ import nltk
 from TwitterClient import TwitterClient
 from gensim.models.word2vec import Word2Vec
 import gensim.downloader as api
+from nltk.corpus import stopwords 
+from nltk.tokenize import word_tokenize
 
 nltk.download('averaged_perceptron_tagger')
 nltk.download('punkt')
+
+stop_words = set(stopwords.words('english'))
 
 class LangProcessor():
 	'''
@@ -39,7 +43,8 @@ class LangProcessor():
 		with open(textfile, "a") as file:
 			for tweet in tweets:
 				for word in tweet:
-					file.write(word + ' ')
+					if word not in stop_words:
+						file.write(word + ' ')
 				file.write('\n')
 			file.close()
 
