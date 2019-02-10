@@ -29,6 +29,15 @@ class LangProcessor():
 
 		return freq_key
 
+	def addtoCorpus(self, textfile, tweets):
+		text = open(textfile, "w")
+		for tweet in tweets:
+			for word in tweet:
+				text.write(word)
+		text.close()
+
+
+
 
 def main():
 	query = 'slang'
@@ -37,6 +46,9 @@ def main():
 	# calling function to get tweets 
 	tweets = api.get_tweets(query = query, count = 200) 
 	pos = get_pos(query, tweets)
+	text = "corpus.txt"
+	newCorp = addtoCorpus(text, tweets)
+
 
 
 if __name__ == "__main__": 
