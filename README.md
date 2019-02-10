@@ -15,6 +15,16 @@ they are easier to compare. From there, we do a vector comparison that finds the
 of the input slang. We extract the words that the vectors represent to find synonyms of the input word, which
 is then returned to the user on the front end.
 
+SAMPLE OUTPUTS:
+```
+dude relates to friend, friends, or man
+fam relates to dude, friends, or friend
+bro relates to cool, please, or man
+bruh relates to man, also, or please
+cool relates to awesome, follow, or best
+bro relates to see, os, or friends
+```
+
 ## Development
 
 To install dependencies, run:
