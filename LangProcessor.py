@@ -43,7 +43,7 @@ class LangProcessor():
 		with open(textfile, "a") as file:
 			for tweet in tweets:
 				for word in tweet:
-					if word not in stop_words:
+					if word not in stop_words and not word.isdigit():
 						file.write(word + ' ')
 				file.write('\n')
 			file.close()
