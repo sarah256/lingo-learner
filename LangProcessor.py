@@ -1,5 +1,7 @@
 import nltk
 import TwitterClient
+nltk.download('averaged_perceptron_tagger')
+
 
 class LangProcessor():
 	'''
@@ -30,24 +32,28 @@ class LangProcessor():
 		return freq_key
 
 	def addtoCorpus(self, textfile, tweets):
-		text = open(textfile, "w")
-		for tweet in tweets:
-			for word in tweet:
-				text.write(word)
-		text.close()
+		with open(textfile, "a") as file:
+			for tweet in tweets:
+				for word in tweet:
+					file.write(word + ' ')
+				file.write('\n')
+			file.close()
 
 
 
 
 def main():
-	query = 'slang'
+
+	query = 'lit'
 	# creating object of TwitterClient Class 
 	api = TwitterClient() 
 	# calling function to get tweets 
 	tweets = api.get_tweets(query = query, count = 200) 
-	pos = get_pos(query, tweets)
+
+	langP = LangProcessor()
+	pos = langP.get_pos(query, tweets)
 	text = "corpus.txt"
-	newCorp = addtoCorpus(text, tweets)
+	newCorp = langP.addtoCorpus(text, tweets)
 
 
 
