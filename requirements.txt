@@ -3,3 +3,4 @@ Flask
 nltk
 numpy
 re
+gensim

@@ -1,5 +1,8 @@
 import nltk
 import TwitterClient
+from gensim.models.word2vec import Word2Vec
+import gensim.downloader as api
+
 nltk.download('averaged_perceptron_tagger')
 
 
@@ -39,7 +42,10 @@ class LangProcessor():
 				file.write('\n')
 			file.close()
 
-
+	def build_model(self, corpus, query):
+		model = Word2Vec(corpus)  # train a model from the corpus
+		result = model.most_similar(query)
+		return result
 
 
 def main():
@@ -52,8 +58,10 @@ def main():
 
 	langP = LangProcessor()
 	pos = langP.get_pos(query, tweets)
+
 	text = "corpus.txt"
 	newCorp = langP.addtoCorpus(text, tweets)
+	model = langP.build_model
 
 
 
