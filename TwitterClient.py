@@ -35,7 +35,7 @@ class TwitterClient(object):
 		'''
 		return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split()) 
 
-	def get_tweets(self, query, count = 10): 
+	def get_tweets(self, query, count): 
 		''' 
 		Main function to fetch tweets and parse them.
 		Returns an array of arrays of tokenized tweets.
@@ -77,7 +77,7 @@ def main():
 	# creating object of TwitterClient Class 
 	api = TwitterClient() 
 	# calling function to get tweets 
-	tweets = api.get_tweets(query = 'slang', count = 200) 
+	# tweets = api.get_tweets(query = 'slang', count = 1000) 
 
 
 if __name__ == "__main__": 

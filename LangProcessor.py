@@ -7,6 +7,7 @@ from nltk.tokenize import word_tokenize
 
 nltk.download('averaged_perceptron_tagger')
 nltk.download('punkt')
+nltk.download('stopwords')
 
 stop_words = set(stopwords.words('english'))
 
@@ -55,23 +56,17 @@ class LangProcessor():
 		return result
 
 	def generateDefinition(self, word, pos, synonyms):
-		if "NN" in pos:
-			return "A "+word+" is a "+synonyms[0]+", "+ synonyms[1]+", or "+synonyms[2]
-		if "VB" in pos:
-			return "To "+word+" is to "+synonyms[0]+", "+synonyms[1]+", or "+synonyms[2]
-		if "JJ" in pos:
-			return word + " means " + synonyms[0]+", "+synonyms[1]+", or "+synonyms[2]
-		else:
-			return synonyms[0]+", or "+synonyms[1]+", or "+synonyms[2]
+		return word + ' relates to ' + synonyms[0] + ', '+ synonyms[1] + ', or ' + synonyms[2]
 
 
 def main():
 
-	query = 'lit'
+	query = 'turnt'
 	# creating object of TwitterClient Class 
 	api = TwitterClient() 
 	# calling function to get tweets 
-	tweets = api.get_tweets(query = query, count = 200) 
+	for i in range(10):
+		tweets = api.get_tweets(query = query, count = 1000) 
 
 	langP = LangProcessor()
 	pos = langP.get_pos(query, tweets)
