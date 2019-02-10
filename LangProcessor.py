@@ -1,10 +1,10 @@
 import nltk
-import TwitterClient
+from TwitterClient import TwitterClient
 from gensim.models.word2vec import Word2Vec
 import gensim.downloader as api
 
 nltk.download('averaged_perceptron_tagger')
-
+nltk.download('punkt')
 
 class LangProcessor():
 	'''
@@ -17,13 +17,15 @@ class LangProcessor():
 		'''
 		pos_dict = {}
 		for tweet in tweets:
-			query_index = tweet.index(query)
-			sent_pos = nltk.pos_tag(tweet)
-			query_pos = sent_pos[query_index][1]
-			if query_pos in pos_dict.keys():
-				pos_dict[query_pos] += 1
-			else:
-				pos_dict[query_pos] = 1
+			print(tweet)
+			if query in tweet:
+				query_index = tweet.index(query)
+				sent_pos = nltk.pos_tag(tweet)
+				query_pos = sent_pos[query_index][1]
+				if query_pos in pos_dict.keys():
+					pos_dict[query_pos] += 1
+				else:
+					pos_dict[query_pos] = 1
 
 		freq_key = ''
 		freq_val = 0

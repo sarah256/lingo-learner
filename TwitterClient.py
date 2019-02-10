@@ -3,6 +3,9 @@ import nltk
 import tweepy 
 from tweepy import OAuthHandler 
 
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+
 class TwitterClient(object): 
 	''' 
 	Generic Twitter Class for analysis. 
@@ -12,10 +15,10 @@ class TwitterClient(object):
 		Class constructor or initialization method. 
 		'''
 		# keys and tokens from the Twitter Dev Console 
-		consumer_key = 'XXXXXXXXXXXXXXXXXXXXXXXX'
-		consumer_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-		access_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-		access_token_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXX'
+		consumer_key = 'GbmIwXUqepdtjYpsQD6peQ91A'
+		consumer_secret = 'IqLURVxsC5LDa20OxS84XjNrZXl6gTYnar5Lg9L5hPaxadD8Mc'
+		access_token = '867556262963294208-VcrIeszOV9WwD39TbqVIq3A4gXbQkNF'
+		access_token_secret = 'Z4rVze02tPR4hpGQ5UVzCJ0vzYQDtc6dW5Jp7iic8GJ0k'
 
 		# attempt authentication 
 		try: 
@@ -59,10 +62,11 @@ class TwitterClient(object):
 				if tweet.retweet_count > 0: 
 					# if tweet has retweets, ensure that it is appended only once 
 					if parsed_tweet not in tweets: 
-						tokens = nltk.word_tokenize(tweet)
+						# print(self.clean_tweet(parsed_tweet['text'])[3:].lower())
+						tokens = nltk.word_tokenize(self.clean_tweet(parsed_tweet['text'])[3:].lower())
 						tweets.append(tokens)
 				else: 
-					tokens = nltk.word_tokenize(tweet)
+					tokens = nltk.word_tokenize(self.clean_tweet(parsed_tweet['text'])[3:].lower())
 					tweets.append(tokens)
 
 			# return parsed and tokenized tweets 

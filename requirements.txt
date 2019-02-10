@@ -3,4 +3,5 @@ Flask
 nltk
 numpy
 re
-gensim
+gensim.downloader
+gensim.models.word2vec
