@@ -17,7 +17,6 @@ class LangProcessor():
 		'''
 		pos_dict = {}
 		for tweet in tweets:
-			print(tweet)
 			if query in tweet:
 				query_index = tweet.index(query)
 				sent_pos = nltk.pos_tag(tweet)
@@ -47,17 +46,18 @@ class LangProcessor():
 	def build_model(self, corpus, query):
 		model = Word2Vec(corpus)  # train a model from the corpus
 		result = model.most_similar(query)
+		# import pdb;pdb.set_trace()
 		return result
 
-	def generateDefinition(word, pos, synonyms):
+	def generateDefinition(self, word, pos, synonyms):
 		if "NN" in pos:
-			return "A "+word+"is a "+synonyms[0]+", "+ synonyms[1]+", or "+synonyms[2]
+			return "A "+word+" is a "+synonyms[0]+", "+ synonyms[1]+", or "+synonyms[2]
 		if "VB" in pos:
-			return "To "+word+"is to "+synonyms[0]+", "+synonyms[1]+", or "+synonyms[2]
+			return "To "+word+" is to "+synonyms[0]+", "+synonyms[1]+", or "+synonyms[2]
 		if "JJ" in pos:
-			return word + "means " + synonyms[0]+", "+synonyms[1]+",or "+synonyms[2]
+			return word + " means " + synonyms[0]+", "+synonyms[1]+", or "+synonyms[2]
 		else:
-			return synonyms[0]+",or "+synonyms[1]+", or"+synonyms[2]
+			return synonyms[0]+", or "+synonyms[1]+", or "+synonyms[2]
 
 
 def main():
@@ -72,14 +72,18 @@ def main():
 	pos = langP.get_pos(query, tweets)
 
 	text = "corpus.txt"
-	newCorp = langP.addtoCorpus(text, tweets)
-	model = langP.build_model
+	langP.addtoCorpus(text, tweets)
+	list_of_lists = []
+	with open("corpus.txt", "r") as f:
+		for line in f:
+			list_of_lists.append(line.split())
+	model = langP.build_model(list_of_lists, query)
 	similars = []
 	similars.append(model[0][0])
 	similars.append(model[1][0])
 	similars.append(model[2][0])
 	definition = langP.generateDefinition(query, pos, similars)
-
+	print(definition)
 
 
 if __name__ == "__main__": 
