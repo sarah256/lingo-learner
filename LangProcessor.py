@@ -1,5 +1,4 @@
 import nltk
-from TwitterClient import TwitterClient
 from gensim.models.word2vec import Word2Vec
 import gensim.downloader as api
 from nltk.corpus import stopwords 
@@ -60,30 +59,7 @@ class LangProcessor():
 
 
 def main():
-
-	query = 'turnt'
-	# creating object of TwitterClient Class 
-	api = TwitterClient() 
-	# calling function to get tweets 
-	for i in range(10):
-		tweets = api.get_tweets(query = query, count = 1000) 
-
-	langP = LangProcessor()
-	pos = langP.get_pos(query, tweets)
-
-	text = "corpus.txt"
-	langP.addtoCorpus(text, tweets)
-	list_of_lists = []
-	with open("corpus.txt", "r") as f:
-		for line in f:
-			list_of_lists.append(line.split())
-	model = langP.build_model(list_of_lists, query)
-	similars = []
-	similars.append(model[0][0])
-	similars.append(model[1][0])
-	similars.append(model[2][0])
-	definition = langP.generateDefinition(query, pos, similars)
-	print(definition)
+	return
 
 
 if __name__ == "__main__": 
