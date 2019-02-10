@@ -18,8 +18,8 @@ def input_text():
 		# creating object of TwitterClient Class 
 		api = TwitterClient() 
 		# calling function to get tweets 
-		for i in range(10):
-			tweets = api.get_tweets(query = query, count = 1000) 
+		# for i in range(2):
+		tweets = api.get_tweets(query = query, count = 100)
 
 		langP = LangProcessor()
 		pos = langP.get_pos(query, tweets)
