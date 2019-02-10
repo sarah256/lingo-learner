@@ -2,6 +2,7 @@
 
 A web application using NLP to create definitions for slang words based on context from tweets
 
+Made with :heart: at HackBeanpot
 
 ## Development
 
